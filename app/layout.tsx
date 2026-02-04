@@ -71,10 +71,10 @@ export const metadata: Metadata = {
   // Icônes et favicon
   icons: {
     icon: [
-      { url: "/hermine.webp", sizes: "32x32", type: "image/webp" },
-      { url: "/hermine.webp", sizes: "16x16", type: "image/webp" },
+      { url: "/favicon.svg", sizes: "32x32", type: "image/svg+xml" },
+      { url: "/favicon.svg", sizes: "16x16", type: "image/svg+xml" },
     ],
-    apple: [{ url: "/hermine.webp", sizes: "180x180", type: "image/webp" }],
+    apple: [{ url: "/favicon.svg", sizes: "180x180", type: "image/svg+xml" }],
   },
 
   // Open Graph (Facebook, LinkedIn, etc.)

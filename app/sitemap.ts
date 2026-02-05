@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://krouin-ipsum.bzh";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://krouin-ipsum.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const currentDate = new Date();

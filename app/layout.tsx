@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://krouin-ipsum.bzh";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://krouin-ipsum.vercel.app";
 
 export const metadata: Metadata = {
   // Titre et description optimisés SEO
@@ -45,9 +45,11 @@ export const metadata: Metadata = {
   authors: [{ name: "NockIA" }],
   creator: "NockIA",
   publisher: "NockIA",
-
   // Métadonnées de base
   metadataBase: new URL(siteUrl),
+  verification: {
+    google: "YfQUVa-iEGOUMME5zuSXZHSuqWYNH5TXar6jF9iq-Lc",
+  },
   alternates: {
     canonical: "/",
     languages: {

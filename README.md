@@ -4,7 +4,7 @@
 
 Un outil gratuit pour generer du faux texte en breton authentique, destine aux developpeurs et designers.
 
-[Demo en ligne](https://krouin-ipsum.bzh)
+[Demo en ligne](https://krouin-ipsum.vercel.app/)
 
 ---
 
@@ -136,10 +136,6 @@ Les phrases sont selectionnees aleatoirement sans repetition pour garantir la va
 ```env
 NEXT_PUBLIC_SITE_URL=https://votre-domaine.com
 ```
-
-## Contribuer
-
-Les contributions sont les bienvenues. Pour les changements majeurs, ouvrez d'abord une issue pour discuter des modifications souhaitees.
 
 ## Licence
 

@@ -55,7 +55,12 @@ const Home: React.FC = () => {
       <main className="main">
         <div className="hero">
           <div className="hero-badge">
-            <span className="hero-badge-icon">⚓</span>
+            <span className="hero-badge-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.5 13.5L5 17l3.5 3.5M15.5 13.5L19 17l-3.5 3.5" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 9L10.5 20" />
+              </svg>
+            </span>
             <span>Evit an diorroerien</span>
           </div>
           <h2 className="hero-title">

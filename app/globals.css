@@ -149,6 +149,12 @@ body::after {
   gap: 0.75rem;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .header-logo {
   width: 2.5rem;
   height: 2.5rem;
@@ -282,7 +288,6 @@ body::after {
 .card:hover {
   box-shadow: var(--shadow-lg);
   border-color: var(--border-highlight);
-  transform: translateY(-2px);
 }
 
 .card:hover::before {
@@ -303,7 +308,6 @@ body::after {
 .dark .card:hover {
   border-color: rgba(255, 78, 57, 0.45);
   box-shadow: 0 0 0 1px rgba(255, 78, 57, 0.2), 0 16px 40px rgba(0, 0, 0, 0.45);
-  transform: translateY(-2px);
 }
 
 /* Form */
@@ -589,6 +593,54 @@ body::after {
   background: rgba(16, 185, 129, 0.1);
 }
 
+.btn-copy-error {
+  color: #ef4444;
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.output-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.output-format-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.output-format-select {
+  padding: 0.4rem 0.55rem;
+  min-width: 7rem;
+  font-size: 0.875rem;
+}
+
+.status-banner {
+  width: 100%;
+  max-width: 48rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid;
+  font-weight: 500;
+}
+
+.status-error {
+  color: #b91c1c;
+  border-color: rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.dark .status-error {
+  color: #fecaca;
+  border-color: rgba(248, 113, 113, 0.45);
+  background: rgba(127, 29, 29, 0.35);
+}
+
 .stats {
   display: flex;
   gap: 2.5rem;
@@ -754,6 +806,10 @@ body::after {
     padding: 1rem;
   }
 
+  .header-actions {
+    gap: 0.35rem;
+  }
+
   .main {
     padding: 2rem 1rem;
   }
@@ -769,6 +825,17 @@ body::after {
   .stats {
     flex-direction: column;
     gap: 1rem;
+  }
+
+  .output-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .output-actions {
+    width: 100%;
+    justify-content: flex-start;
   }
 
   .stat-item {

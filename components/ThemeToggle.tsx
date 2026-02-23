@@ -1,28 +1,48 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 
-const ThemeToggle: React.FC = () => {
-  const [isDark, setIsDark] = useState(false);
-  const [mounted, setMounted] = useState(false);
+interface ThemeToggleProps {
+  labels: {
+    toLight: string;
+    toDark: string;
+  };
+}
+
+const getInitialDarkMode = () => {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
+  const stored = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  return stored === 'dark' || (!stored && prefersDark);
+};
+
+const useHydrated = () => {
+  return useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+};
+
+const ThemeToggle: React.FC<ThemeToggleProps> = ({ labels }) => {
+  const hydrated = useHydrated();
+  const [isDark, setIsDark] = useState(getInitialDarkMode);
 
   useEffect(() => {
-    setMounted(true);
-    const stored = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const dark = stored === 'dark' || (!stored && prefersDark);
-    setIsDark(dark);
-    document.documentElement.classList.toggle('dark', dark);
-  }, []);
+    if (!hydrated) return;
+    document.documentElement.classList.toggle('dark', isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }, [hydrated, isDark]);
 
   const toggleTheme = () => {
     const newDark = !isDark;
     setIsDark(newDark);
-    localStorage.setItem('theme', newDark ? 'dark' : 'light');
-    document.documentElement.classList.toggle('dark', newDark);
   };
 
-  if (!mounted) {
+  if (!hydrated) {
     return <div className="theme-toggle-placeholder" />;
   }
 
@@ -30,8 +50,8 @@ const ThemeToggle: React.FC = () => {
     <button
       onClick={toggleTheme}
       className="theme-toggle"
-      aria-label={isDark ? 'Activer le mode clair' : 'Activer le mode sombre'}
-      title={isDark ? 'Mode clair — Mod sklaer' : 'Mode sombre — Mod teñval'}
+      aria-label={isDark ? labels.toLight : labels.toDark}
+      title={isDark ? labels.toLight : labels.toDark}
     >
       {isDark ? (
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

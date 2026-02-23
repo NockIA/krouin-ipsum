@@ -1,0 +1,43 @@
+import type { UiLabels } from './types';
+
+export const fr: UiLabels = {
+  subtitle: 'Krouer testenn-liesseurt e brezhoneg',
+  badge: 'Pour développeurs et designers',
+  heroTitle: 'Générateur Lorem Ipsum Breton',
+  heroTitleBr: 'Lorem Ipsum e Brezhoneg',
+  heroDescription:
+    'Générez du faux texte en breton à partir d\'un corpus de 10 000 phrases issues de Wikipedia Brezhoneg. Parfait pour vos maquettes et projets web.',
+  langToggle: 'E brezhoneg',
+  generateError: 'Impossible de générer le texte. Réessayez dans un instant.',
+  themeDark: 'Activer le mode sombre',
+  themeLight: 'Activer le mode clair',
+  form: {
+    preset: 'Preset',
+    seed: 'Seed',
+    seedHint: 'Optionnel pour une génération reproductible',
+    paragraphs: 'Paragraphes',
+    sentences: 'Phrases',
+    generate: 'Générer',
+    generating: 'Génération...',
+  },
+  presets: {
+    hero: 'Hero',
+    card: 'Card UI',
+    article: 'Article',
+    short: 'Placeholder court',
+  },
+  output: {
+    title: 'Texte',
+    copy: 'Copier',
+    copied: 'Copié !',
+    copyError: 'Échec de copie',
+    emptyTitle: 'Le texte généré apparaîtra ici',
+    emptyHint: 'Lance une génération pour commencer.',
+    statsParagraph: 'Paragraphe',
+    statsSentence: 'Phrase',
+    statsWord: 'Mot',
+    export: 'Exporter',
+    exportFormat: 'Format',
+    exportFile: 'Télécharger',
+  },
+};

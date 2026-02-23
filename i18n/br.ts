@@ -1,0 +1,43 @@
+import type { UiLabels } from './types';
+
+export const br: UiLabels = {
+  subtitle: 'Krouer testenn-liesseurt e brezhoneg',
+  badge: 'Evit an diorroerien hag an tresourien',
+  heroTitle: 'Krouer testenn-liesseurt e brezhoneg',
+  heroTitleBr: 'Lorem Ipsum e Brezhoneg',
+  heroDescription:
+    'Sav testenn faos e brezhoneg diwar ur c\'horpus 10 000 frazenn eus Wikipedia Brezhoneg. Mat evit mockups ha raktresoù web.',
+  langToggle: 'E galleg',
+  generateError: 'N\'eus ket bet gallet sevel an destenn. Klaskit en-dro.',
+  themeDark: 'Gweredekaat ar mod teñval',
+  themeLight: 'Gweredekaat ar mod sklaer',
+  form: {
+    preset: 'Preset',
+    seed: 'Had',
+    seedHint: 'Diret evit kaout un disoc\'h heñvel',
+    paragraphs: 'Paragrafennoù',
+    sentences: 'Frazennoù',
+    generate: 'Sevel',
+    generating: 'O sevel...',
+  },
+  presets: {
+    hero: 'Hero',
+    card: 'Card UI',
+    article: 'Pennad',
+    short: 'Placeholder berr',
+  },
+  output: {
+    title: 'Testenn',
+    copy: 'Eilañ',
+    copied: 'Eilet !',
+    copyError: 'Fazi eilañ',
+    emptyTitle: 'An destenn savet a vo diskouezet amañ',
+    emptyHint: 'Lañsit ur sevel evit kregiñ.',
+    statsParagraph: 'Paragraf',
+    statsSentence: 'Frazenn',
+    statsWord: 'Ger',
+    export: 'Ezporzhiañ',
+    exportFormat: 'Furmad',
+    exportFile: 'Pellgargañ',
+  },
+};

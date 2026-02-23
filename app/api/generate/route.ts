@@ -4,21 +4,24 @@ import { generateTextWithStats } from '@/lib/generator';
 interface GenerateRequest {
   paragraphs?: number;
   sentencesPerParagraph?: number;
+  seed?: string;
 }
+
+const parseBoundedNumber = (value: unknown, fallback: number, min: number, max: number) => {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.max(min, Math.min(max, Math.trunc(parsed)));
+};
 
 export async function POST(request: NextRequest) {
   try {
     const body: GenerateRequest = await request.json();
 
-    // Valeurs par défaut et validation
-    let paragraphs = body.paragraphs ?? 3;
-    let sentencesPerParagraph = body.sentencesPerParagraph ?? 5;
+    const paragraphs = parseBoundedNumber(body.paragraphs, 3, 1, 20);
+    const sentencesPerParagraph = parseBoundedNumber(body.sentencesPerParagraph, 5, 1, 10);
+    const seed = typeof body.seed === 'string' ? body.seed.trim() : undefined;
 
-    // Limites
-    paragraphs = Math.max(1, Math.min(20, paragraphs));
-    sentencesPerParagraph = Math.max(1, Math.min(10, sentencesPerParagraph));
-
-    const result = generateTextWithStats(paragraphs, sentencesPerParagraph);
+    const result = generateTextWithStats(paragraphs, sentencesPerParagraph, seed);
 
     return NextResponse.json({
       success: true,
@@ -39,14 +42,11 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
 
-  let paragraphs = parseInt(searchParams.get('paragraphs') ?? '3', 10);
-  let sentencesPerParagraph = parseInt(searchParams.get('sentencesPerParagraph') ?? '5', 10);
+  const paragraphs = parseBoundedNumber(searchParams.get('paragraphs'), 3, 1, 20);
+  const sentencesPerParagraph = parseBoundedNumber(searchParams.get('sentencesPerParagraph'), 5, 1, 10);
+  const seed = searchParams.get('seed')?.trim() || undefined;
 
-  // Limites
-  paragraphs = Math.max(1, Math.min(20, paragraphs));
-  sentencesPerParagraph = Math.max(1, Math.min(10, sentencesPerParagraph));
-
-  const result = generateTextWithStats(paragraphs, sentencesPerParagraph);
+  const result = generateTextWithStats(paragraphs, sentencesPerParagraph, seed);
 
   return NextResponse.json({
     success: true,

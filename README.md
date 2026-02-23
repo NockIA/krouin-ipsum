@@ -11,11 +11,13 @@ Un outil gratuit pour generer du faux texte en breton authentique, destine aux d
 ## Fonctionnalites
 
 - Generation de texte breton authentique (corpus de 10 000 phrases)
-- Parametres personnalisables (nombre de paragraphes et phrases)
+- Parametres personnalisables (presets, paragraphes, phrases, seed optionnel)
 - Copie en un clic vers le presse-papier
+- Export multi-format (TXT, Markdown, JSON, HTML)
 - Statistiques (paragraphes, phrases, mots)
 - Theme clair/sombre
-- Interface bilingue francais/breton
+- Interface bilingue FR/BR avec bascule
+- Partage de configuration par URL (query params)
 - API REST gratuite
 
 ## Stack technique
@@ -66,6 +68,7 @@ GET  /api/generate
 |-----------|------|--------|-----|-----|
 | `paragraphs` | number | 3 | 1 | 20 |
 | `sentencesPerParagraph` | number | 5 | 1 | 10 |
+| `seed` | string | - | - | - |
 
 ### Exemple de requete
 
@@ -73,10 +76,10 @@ GET  /api/generate
 # POST
 curl -X POST https://krouin-ipsum.bzh/api/generate \
   -H "Content-Type: application/json" \
-  -d '{"paragraphs": 2, "sentencesPerParagraph": 3}'
+  -d '{"paragraphs": 2, "sentencesPerParagraph": 3, "seed": "mockup-home"}'
 
 # GET
-curl "https://krouin-ipsum.bzh/api/generate?paragraphs=2&sentencesPerParagraph=3"
+curl "https://krouin-ipsum.bzh/api/generate?paragraphs=2&sentencesPerParagraph=3&seed=mockup-home"
 ```
 
 ### Exemple de reponse
@@ -123,7 +126,8 @@ krouin-ipsum/
 
 Le corpus de 10 000 phrases provient de [Leipzig Corpora Collection](https://wortschatz.uni-leipzig.de/en/download/Breton) - Wikipedia Brezhoneg 2021.
 
-Les phrases sont selectionnees aleatoirement sans repetition pour garantir la variete du texte genere.
+Les phrases sont selectionnees aleatoirement sans repetition a l'echelle d'un paragraphe.
+Le parametre `seed` permet de reproduire exactement un resultat.
 
 ## Deploiement
 

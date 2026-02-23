@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://krouin-ipsum.vercel.app";
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://krouin-ipsum.vercel.app").replace(/\/$/, "");
 
 export const metadata: Metadata = {
   // Titre et description optimisés SEO
@@ -49,12 +49,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   verification: {
     google: "YfQUVa-iEGOUMME5zuSXZHSuqWYNH5TXar6jF9iq-Lc",
-  },
-  alternates: {
-    canonical: "/",
-    languages: {
-      "fr-FR": "/",
-    },
   },
 
   // Robots et indexation

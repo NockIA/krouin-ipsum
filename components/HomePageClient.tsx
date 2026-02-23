@@ -195,6 +195,7 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
             <p className="footer-text footer-breton">
               « Brezhoneg bev, brezhoneg frank »
             </p>
+            <p className="footer-text">© {new Date().getFullYear()} NockIA</p>
           </div>
         </footer>
       </main>

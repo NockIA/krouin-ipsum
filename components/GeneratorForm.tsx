@@ -15,6 +15,7 @@ interface GeneratorFormProps {
     preset: string;
     seed: string;
     seedHint: string;
+    seedPlaceholder: string;
     paragraphs: string;
     sentences: string;
     generate: string;
@@ -78,7 +79,7 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
             value={seed}
             onChange={(e) => onSeedChange(e.target.value)}
             className="form-input"
-            placeholder="ex: mockup-landing"
+            placeholder={labels.seedPlaceholder}
           />
         </div>
       </div>

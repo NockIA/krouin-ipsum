@@ -14,6 +14,7 @@ export interface UiLabels {
     preset: string;
     seed: string;
     seedHint: string;
+    seedPlaceholder: string;
     paragraphs: string;
     sentences: string;
     generate: string;

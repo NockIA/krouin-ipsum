@@ -15,6 +15,7 @@ export const fr: UiLabels = {
     preset: 'Preset',
     seed: 'Seed',
     seedHint: 'Optionnel pour une génération reproductible',
+    seedPlaceholder: 'ex : maquette-accueil',
     paragraphs: 'Paragraphes',
     sentences: 'Phrases',
     generate: 'Générer',

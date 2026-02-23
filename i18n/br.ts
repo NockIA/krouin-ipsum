@@ -15,6 +15,7 @@ export const br: UiLabels = {
     preset: 'Preset',
     seed: 'Had',
     seedHint: 'Diret evit kaout un disoc\'h heñvel',
+    seedPlaceholder: 'sk : patrom-degemer',
     paragraphs: 'Paragrafennoù',
     sentences: 'Frazennoù',
     generate: 'Sevel',

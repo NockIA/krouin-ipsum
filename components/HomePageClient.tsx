@@ -7,6 +7,7 @@ import TextOutput from '@/components/TextOutput';
 import ThemeToggle from '@/components/ThemeToggle';
 import HermineLogo from '@/components/HermineLogo';
 import { i18n, type UiLanguage } from '@/i18n';
+import type { TransformOptions } from '@/lib/generator';
 
 interface Stats {
   paragraphs: number | null;
@@ -40,7 +41,7 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
   const [seed, setSeed] = useState('');
   const [preset, setPreset] = useState<keyof typeof PRESET_CONFIG>('card');
   const [charCount, setCharCount] = useState('');
-  const [noSpaces, setNoSpaces] = useState(false);
+  const [transforms, setTransforms] = useState<TransformOptions>({});
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -104,7 +105,7 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
           sentencesPerParagraph,
           seed: seed.trim() || undefined,
           charCount: charCount.trim() ? Number(charCount) : undefined,
-          noSpaces: noSpaces || undefined,
+          transforms,
         }),
       });
 
@@ -174,13 +175,13 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
             seed={seed}
             preset={preset}
             charCount={charCount}
-            noSpaces={noSpaces}
+            transforms={transforms}
             onParagraphsChange={setParagraphs}
             onSentencesChange={setSentencesPerParagraph}
             onSeedChange={setSeed}
             onPresetChange={handlePresetChange}
             onCharCountChange={setCharCount}
-            onNoSpacesChange={setNoSpaces}
+            onTransformChange={(key, value) => setTransforms(prev => ({ ...prev, [key]: value }))}
             onGenerate={handleGenerate}
             isLoading={isLoading}
             labels={{

@@ -1,18 +1,20 @@
 'use client';
 
+import type { TransformOptions } from '@/lib/generator';
+
 interface GeneratorFormProps {
   paragraphs: number;
   sentencesPerParagraph: number;
   seed: string;
   preset: 'hero' | 'card' | 'article' | 'short';
   charCount: string;
-  noSpaces: boolean;
+  transforms: TransformOptions;
   onParagraphsChange: (value: number) => void;
   onSentencesChange: (value: number) => void;
   onSeedChange: (value: string) => void;
   onPresetChange: (value: 'hero' | 'card' | 'article' | 'short') => void;
   onCharCountChange: (value: string) => void;
-  onNoSpacesChange: (value: boolean) => void;
+  onTransformChange: (key: keyof TransformOptions, value: boolean) => void;
   onGenerate: () => void;
   isLoading: boolean;
   labels: {
@@ -25,7 +27,14 @@ interface GeneratorFormProps {
     charCount: string;
     charCountHint: string;
     charCountPlaceholder: string;
+    transformsTitle: string;
     noSpaces: string;
+    uppercase: string;
+    lowercase: string;
+    capitalise: string;
+    numbersOnly: string;
+    removePunctuation: string;
+    removeAccents: string;
     generate: string;
     generating: string;
     presets: {
@@ -43,13 +52,13 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
   seed,
   preset,
   charCount,
-  noSpaces,
+  transforms,
   onParagraphsChange,
   onSentencesChange,
   onSeedChange,
   onPresetChange,
   onCharCountChange,
-  onNoSpacesChange,
+  onTransformChange,
   onGenerate,
   isLoading,
   labels,
@@ -60,6 +69,16 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
     e.preventDefault();
     onGenerate();
   };
+
+  const TRANSFORM_KEYS: Array<{ key: keyof TransformOptions; label: string }> = [
+    { key: 'noSpaces',          label: labels.noSpaces },
+    { key: 'uppercase',         label: labels.uppercase },
+    { key: 'lowercase',         label: labels.lowercase },
+    { key: 'capitalise',        label: labels.capitalise },
+    { key: 'numbersOnly',       label: labels.numbersOnly },
+    { key: 'removePunctuation', label: labels.removePunctuation },
+    { key: 'removeAccents',     label: labels.removeAccents },
+  ];
 
   return (
     <form onSubmit={handleSubmit} className="generator-form">
@@ -152,18 +171,23 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
             placeholder={labels.charCountPlaceholder}
           />
         </div>
+      </div>
 
-        <div className="form-group" style={{ justifyContent: 'flex-end' }}>
-          <label htmlFor="noSpaces" className="form-label form-label-checkbox">
-            <input
-              type="checkbox"
-              id="noSpaces"
-              checked={noSpaces}
-              onChange={(e) => onNoSpacesChange(e.target.checked)}
-              className="form-checkbox"
-            />
-            {labels.noSpaces}
-          </label>
+      <div className="transforms-panel">
+        <span className="transforms-title">{labels.transformsTitle}</span>
+        <div className="transforms-grid">
+          {TRANSFORM_KEYS.map(({ key, label }) => (
+            <label key={key} htmlFor={`transform-${key}`} className="form-label form-label-checkbox">
+              <input
+                type="checkbox"
+                id={`transform-${key}`}
+                checked={!!transforms[key]}
+                onChange={(e) => onTransformChange(key, e.target.checked)}
+                className="form-checkbox"
+              />
+              {label}
+            </label>
+          ))}
         </div>
       </div>
 
@@ -192,4 +216,4 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
   );
 }
 
-export default GeneratorForm; 
+export default GeneratorForm;

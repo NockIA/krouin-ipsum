@@ -20,7 +20,14 @@ export interface UiLabels {
     charCount: string;
     charCountHint: string;
     charCountPlaceholder: string;
+    transformsTitle: string;
     noSpaces: string;
+    uppercase: string;
+    lowercase: string;
+    capitalise: string;
+    numbersOnly: string;
+    removePunctuation: string;
+    removeAccents: string;
     generate: string;
     generating: string;
   };

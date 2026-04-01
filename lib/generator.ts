@@ -1,5 +1,15 @@
 import sentences from '@/data/sentences.json';
 
+export interface TransformOptions {
+  noSpaces?: boolean;
+  uppercase?: boolean;
+  lowercase?: boolean;
+  capitalise?: boolean;
+  numbersOnly?: boolean;
+  removePunctuation?: boolean;
+  removeAccents?: boolean;
+}
+
 function seedToInt(seed: string): number {
   let hash = 2166136261;
   for (let i = 0; i < seed.length; i++) {
@@ -22,6 +32,34 @@ function createSeededRandom(seed?: string): () => number {
     t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
+}
+
+export function applyTransformations(text: string, opts: TransformOptions): string {
+  let result = text;
+
+  if (opts.removeAccents) {
+    result = result.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+  if (opts.removePunctuation) {
+    result = result.replace(/[^\w\s\n]/g, '');
+  }
+  if (opts.uppercase) {
+    result = result.toUpperCase();
+  }
+  if (opts.lowercase) {
+    result = result.toLowerCase();
+  }
+  if (opts.capitalise) {
+    result = result.replace(/(?:^|[\s\n])\S/g, c => c.toUpperCase());
+  }
+  if (opts.noSpaces) {
+    result = result.replace(/\s+/g, '');
+  }
+  if (opts.numbersOnly) {
+    result = result.replace(/[^0-9]/g, '');
+  }
+
+  return result;
 }
 
 // Retourne N phrases aléatoires du corpus
@@ -70,49 +108,55 @@ export function generateTextWithStats(
   paragraphCount: number,
   sentencesPerParagraph: number,
   seed?: string,
-  noSpaces = false
+  transforms: TransformOptions = {}
 ) {
-  let text = generateText(paragraphCount, sentencesPerParagraph, seed);
-  if (noSpaces) text = text.replace(/\s+/g, '');
+  const raw = generateText(paragraphCount, sentencesPerParagraph, seed);
+  const text = applyTransformations(raw, transforms);
   const totalSentences = paragraphCount * sentencesPerParagraph;
-  const words = noSpaces ? null : countWords(text);
+  const hasSpaces = !transforms.noSpaces && !transforms.numbersOnly;
 
   return {
     text,
     stats: {
       paragraphs: paragraphCount as number | null,
       sentences: totalSentences as number | null,
-      words,
+      words: hasSpaces ? countWords(text) : 1,
       chars: null as null | number,
     },
   };
 }
 
 // Génère exactement N caractères
-export function generateTextWithExactCharCount(charCount: number, seed?: string, noSpaces = false) {
+export function generateTextWithExactCharCount(
+  charCount: number,
+  seed?: string,
+  transforms: TransformOptions = {}
+) {
   const randomFn = createSeededRandom(seed);
   let accumulated = '';
 
   while (true) {
-    const current = noSpaces ? accumulated.replace(/\s+/g, '') : accumulated;
+    const current = applyTransformations(accumulated, transforms);
     if (current.length >= charCount) break;
+    if (accumulated.length > charCount * 200) break; // sécurité (ex: numbersOnly sur texte sans chiffres)
     const remaining = charCount - current.length;
-    const batchSize = Math.max(1, Math.ceil(remaining / (noSpaces ? 65 : 80)));
-    const batch = getRandomSentences(Math.min(batchSize + 2, sentences.length), randomFn);
+    const batchSize = Math.max(1, Math.ceil(remaining / 60)) + 2;
+    const batch = getRandomSentences(Math.min(batchSize, sentences.length), randomFn);
     for (const sentence of batch) {
       if (accumulated.length > 0) accumulated += ' ';
       accumulated += sentence;
     }
   }
 
-  const text = (noSpaces ? accumulated.replace(/\s+/g, '') : accumulated).slice(0, charCount);
+  const text = applyTransformations(accumulated, transforms).slice(0, charCount);
+  const hasSpaces = !transforms.noSpaces && !transforms.numbersOnly;
 
   return {
     text,
     stats: {
       paragraphs: null as null | number,
       sentences: null as null | number,
-      words: noSpaces ? null : countWords(text),
+      words: hasSpaces ? countWords(text) : 1,
       chars: text.length,
     },
   };

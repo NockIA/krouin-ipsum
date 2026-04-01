@@ -5,10 +5,12 @@ interface GeneratorFormProps {
   sentencesPerParagraph: number;
   seed: string;
   preset: 'hero' | 'card' | 'article' | 'short';
+  charCount: string;
   onParagraphsChange: (value: number) => void;
   onSentencesChange: (value: number) => void;
   onSeedChange: (value: string) => void;
   onPresetChange: (value: 'hero' | 'card' | 'article' | 'short') => void;
+  onCharCountChange: (value: string) => void;
   onGenerate: () => void;
   isLoading: boolean;
   labels: {
@@ -18,6 +20,9 @@ interface GeneratorFormProps {
     seedPlaceholder: string;
     paragraphs: string;
     sentences: string;
+    charCount: string;
+    charCountHint: string;
+    charCountPlaceholder: string;
     generate: string;
     generating: string;
     presets: {
@@ -34,14 +39,17 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
   sentencesPerParagraph,
   seed,
   preset,
+  charCount,
   onParagraphsChange,
   onSentencesChange,
   onSeedChange,
   onPresetChange,
+  onCharCountChange,
   onGenerate,
   isLoading,
   labels,
 }) => {
+  const charCountActive = charCount !== '' && Number(charCount) > 0;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -86,7 +94,7 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
 
       <div className="form-row">
         <div className="form-group">
-          <label htmlFor="paragraphs" className="form-label">
+          <label htmlFor="paragraphs" className="form-label" style={{ opacity: charCountActive ? 0.4 : 1 }}>
             {labels.paragraphs}
             <span className="form-label-hint"> (1-20)</span>
           </label>
@@ -98,11 +106,13 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
             value={paragraphs}
             onChange={(e) => onParagraphsChange(Math.max(1, Math.min(20, parseInt(e.target.value, 10) || 1)))}
             className="form-input"
+            disabled={charCountActive}
+            style={{ opacity: charCountActive ? 0.4 : 1 }}
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="sentences" className="form-label">
+          <label htmlFor="sentences" className="form-label" style={{ opacity: charCountActive ? 0.4 : 1 }}>
             {labels.sentences}
             <span className="form-label-hint"> (1-10)</span>
           </label>
@@ -114,6 +124,27 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
             value={sentencesPerParagraph}
             onChange={(e) => onSentencesChange(Math.max(1, Math.min(10, parseInt(e.target.value, 10) || 1)))}
             className="form-input"
+            disabled={charCountActive}
+            style={{ opacity: charCountActive ? 0.4 : 1 }}
+          />
+        </div>
+      </div>
+
+      <div className="form-row">
+        <div className="form-group">
+          <label htmlFor="charCount" className="form-label">
+            {labels.charCount}
+            <span className="form-label-hint"> — {labels.charCountHint}</span>
+          </label>
+          <input
+            type="number"
+            id="charCount"
+            min={1}
+            max={10000}
+            value={charCount}
+            onChange={(e) => onCharCountChange(e.target.value)}
+            className="form-input"
+            placeholder={labels.charCountPlaceholder}
           />
         </div>
       </div>

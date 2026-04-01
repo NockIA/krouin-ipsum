@@ -3,9 +3,10 @@
 import { useState } from 'react';
 
 interface Stats {
-  paragraphs: number;
-  sentences: number;
+  paragraphs: number | null;
+  sentences: number | null;
   words: number;
+  chars: number | null;
 }
 
 interface TextOutputProps {
@@ -22,6 +23,7 @@ interface TextOutputProps {
     statsParagraph: string;
     statsSentence: string;
     statsWord: string;
+    statsChar: string;
     export: string;
     exportFormat: string;
     exportFile: string;
@@ -163,14 +165,23 @@ const TextOutput: React.FC<TextOutputProps> = ({ text, stats, language, labels }
 
         {stats && (
           <div className="stats">
-            <div className="stat-item">
-              <span className="stat-value">{stats.paragraphs}</span>
-              <span className="stat-label">{labels.statsParagraph}{stats.paragraphs > 1 && language === 'fr' ? 's' : ''}</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-value">{stats.sentences}</span>
-              <span className="stat-label">{labels.statsSentence}{stats.sentences > 1 && language === 'fr' ? 's' : ''}</span>
-            </div>
+            {stats.chars != null ? (
+              <div className="stat-item">
+                <span className="stat-value">{stats.chars}</span>
+                <span className="stat-label">{labels.statsChar}{stats.chars > 1 && language === 'fr' ? 's' : ''}</span>
+              </div>
+            ) : (
+              <>
+                <div className="stat-item">
+                  <span className="stat-value">{stats.paragraphs}</span>
+                  <span className="stat-label">{labels.statsParagraph}{stats.paragraphs != null && stats.paragraphs > 1 && language === 'fr' ? 's' : ''}</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-value">{stats.sentences}</span>
+                  <span className="stat-label">{labels.statsSentence}{stats.sentences != null && stats.sentences > 1 && language === 'fr' ? 's' : ''}</span>
+                </div>
+              </>
+            )}
             <div className="stat-item">
               <span className="stat-value">{stats.words}</span>
               <span className="stat-label">{labels.statsWord}{stats.words > 1 && language === 'fr' ? 's' : ''}</span>

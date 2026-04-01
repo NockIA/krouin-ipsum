@@ -17,6 +17,9 @@ export interface UiLabels {
     seedPlaceholder: string;
     paragraphs: string;
     sentences: string;
+    charCount: string;
+    charCountHint: string;
+    charCountPlaceholder: string;
     generate: string;
     generating: string;
   };
@@ -36,6 +39,7 @@ export interface UiLabels {
     statsParagraph: string;
     statsSentence: string;
     statsWord: string;
+    statsChar: string;
     export: string;
     exportFormat: string;
     exportFile: string;

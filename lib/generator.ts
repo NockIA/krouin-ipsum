@@ -81,6 +81,35 @@ export function generateTextWithStats(
       paragraphs: paragraphCount,
       sentences: totalSentences,
       words,
+      chars: null as null | number,
+    },
+  };
+}
+
+// Génère exactement N caractères
+export function generateTextWithExactCharCount(charCount: number, seed?: string) {
+  const randomFn = createSeededRandom(seed);
+  let accumulated = '';
+
+  while (accumulated.length < charCount) {
+    const batchSize = Math.max(1, Math.ceil((charCount - accumulated.length) / 80));
+    const batch = getRandomSentences(Math.min(batchSize + 2, sentences.length), randomFn);
+    for (const sentence of batch) {
+      if (accumulated.length > 0) accumulated += ' ';
+      accumulated += sentence;
+      if (accumulated.length >= charCount) break;
+    }
+  }
+
+  const text = accumulated.slice(0, charCount);
+
+  return {
+    text,
+    stats: {
+      paragraphs: null as null | number,
+      sentences: null as null | number,
+      words: countWords(text),
+      chars: text.length,
     },
   };
 }

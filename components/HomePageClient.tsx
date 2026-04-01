@@ -9,9 +9,10 @@ import HermineLogo from '@/components/HermineLogo';
 import { i18n, type UiLanguage } from '@/i18n';
 
 interface Stats {
-  paragraphs: number;
-  sentences: number;
+  paragraphs: number | null;
+  sentences: number | null;
   words: number;
+  chars: number | null;
 }
 
 interface HomePageClientProps {
@@ -38,6 +39,7 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
   const [sentencesPerParagraph, setSentencesPerParagraph] = useState(5);
   const [seed, setSeed] = useState('');
   const [preset, setPreset] = useState<keyof typeof PRESET_CONFIG>('card');
+  const [charCount, setCharCount] = useState('');
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -46,10 +48,12 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
     const urlSentences = parseInt(params.get('sentences') ?? '5', 10);
     const urlSeed = params.get('seed') ?? '';
     const urlPreset = params.get('preset');
+    const urlCharCount = params.get('charCount') ?? '';
 
     setParagraphs(clamp(Number.isNaN(urlParagraphs) ? 3 : urlParagraphs, 1, 20));
     setSentencesPerParagraph(clamp(Number.isNaN(urlSentences) ? 5 : urlSentences, 1, 10));
     setSeed(urlSeed);
+    setCharCount(urlCharCount);
 
     if (urlPreset && (Object.keys(PRESET_CONFIG) as Array<keyof typeof PRESET_CONFIG>).includes(urlPreset as keyof typeof PRESET_CONFIG)) {
       setPreset(urlPreset as keyof typeof PRESET_CONFIG);
@@ -66,11 +70,12 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
     if (sentencesPerParagraph !== 5) params.set('sentences', String(sentencesPerParagraph));
     if (seed.trim()) params.set('seed', seed.trim());
     if (preset !== 'card') params.set('preset', preset);
+    if (charCount.trim()) params.set('charCount', charCount.trim());
 
     const query = params.toString();
     const nextUrl = query ? `${window.location.pathname}?${query}` : window.location.pathname;
     window.history.replaceState(null, '', nextUrl);
-  }, [isReady, paragraphs, sentencesPerParagraph, seed, preset]);
+  }, [isReady, paragraphs, sentencesPerParagraph, seed, preset, charCount]);
 
   const handleLanguageToggle = () => {
     const nextLanguage: UiLanguage = language === 'fr' ? 'br' : 'fr';
@@ -93,7 +98,12 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ paragraphs, sentencesPerParagraph, seed: seed.trim() || undefined }),
+        body: JSON.stringify({
+          paragraphs,
+          sentencesPerParagraph,
+          seed: seed.trim() || undefined,
+          charCount: charCount.trim() ? Number(charCount) : undefined,
+        }),
       });
 
       const result = await response.json();
@@ -161,10 +171,12 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
             sentencesPerParagraph={sentencesPerParagraph}
             seed={seed}
             preset={preset}
+            charCount={charCount}
             onParagraphsChange={setParagraphs}
             onSentencesChange={setSentencesPerParagraph}
             onSeedChange={setSeed}
             onPresetChange={handlePresetChange}
+            onCharCountChange={setCharCount}
             onGenerate={handleGenerate}
             isLoading={isLoading}
             labels={{

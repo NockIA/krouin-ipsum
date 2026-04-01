@@ -15,6 +15,7 @@ interface GeneratorFormProps {
   onPresetChange: (value: 'hero' | 'card' | 'article' | 'short') => void;
   onCharCountChange: (value: string) => void;
   onTransformChange: (key: keyof TransformOptions, value: boolean) => void;
+  onReset: () => void;
   onGenerate: () => void;
   isLoading: boolean;
   labels: {
@@ -37,6 +38,7 @@ interface GeneratorFormProps {
     removeAccents: string;
     generate: string;
     generating: string;
+    reset: string;
     presets: {
       hero: string;
       card: string;
@@ -59,6 +61,7 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
   onPresetChange,
   onCharCountChange,
   onTransformChange,
+  onReset,
   onGenerate,
   isLoading,
   labels,
@@ -191,11 +194,23 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
         </div>
       </div>
 
-      <button
-        type="submit"
-        disabled={isLoading}
-        className="btn btn-primary"
-      >
+      <div className="form-actions">
+        <button
+          type="button"
+          onClick={onReset}
+          className="btn btn-secondary"
+        >
+          <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          {labels.reset}
+        </button>
+
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="btn btn-primary"
+        >
         {isLoading ? (
           <>
             <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -211,7 +226,8 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
             {labels.generate}
           </>
         )}
-      </button>
+        </button>
+      </div>
     </form>
   );
 }

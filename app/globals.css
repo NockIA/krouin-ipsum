@@ -76,6 +76,14 @@ body {
   min-height: 100vh;
 }
 
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
 body::before {
   content: '';
   position: fixed;
@@ -492,6 +500,27 @@ body::after {
 .btn-icon {
   width: 1.25rem;
   height: 1.25rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.form-actions .btn-primary {
+  flex: 1;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--muted);
+  border: 2px solid var(--input-border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--foreground);
+  color: var(--foreground);
+  transform: translateY(-1px);
 }
 
 /* Output */

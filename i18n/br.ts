@@ -31,6 +31,7 @@ export const br: UiLabels = {
     removeAccents: 'Hep achentoù',
     generate: 'Sevel',
     generating: 'O sevel...',
+    reset: 'Adderaouekaat',
   },
   presets: {
     hero: 'Hero',

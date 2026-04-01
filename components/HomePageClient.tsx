@@ -85,6 +85,15 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
     router.replace(`/${nextLanguage}${query}`);
   };
 
+  const handleReset = () => {
+    setParagraphs(3);
+    setSentencesPerParagraph(5);
+    setSeed('');
+    setPreset('card');
+    setCharCount('');
+    setTransforms({});
+  };
+
   const handlePresetChange = (value: keyof typeof PRESET_CONFIG) => {
     setPreset(value);
     const config = PRESET_CONFIG[value];
@@ -182,6 +191,7 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
             onPresetChange={handlePresetChange}
             onCharCountChange={setCharCount}
             onTransformChange={(key, value) => setTransforms(prev => ({ ...prev, [key]: value }))}
+            onReset={handleReset}
             onGenerate={handleGenerate}
             isLoading={isLoading}
             labels={{

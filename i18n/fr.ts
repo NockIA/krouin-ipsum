@@ -31,6 +31,7 @@ export const fr: UiLabels = {
     removeAccents: 'Sans accents',
     generate: 'Générer',
     generating: 'Génération...',
+    reset: 'Réinitialiser',
   },
   presets: {
     hero: 'Hero',

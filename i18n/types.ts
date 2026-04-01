@@ -30,6 +30,7 @@ export interface UiLabels {
     removeAccents: string;
     generate: string;
     generating: string;
+    reset: string;
   };
   presets: {
     hero: string;

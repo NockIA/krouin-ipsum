@@ -20,6 +20,7 @@ export interface UiLabels {
     charCount: string;
     charCountHint: string;
     charCountPlaceholder: string;
+    noSpaces: string;
     generate: string;
     generating: string;
   };

@@ -40,6 +40,7 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
   const [seed, setSeed] = useState('');
   const [preset, setPreset] = useState<keyof typeof PRESET_CONFIG>('card');
   const [charCount, setCharCount] = useState('');
+  const [noSpaces, setNoSpaces] = useState(false);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -103,6 +104,7 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
           sentencesPerParagraph,
           seed: seed.trim() || undefined,
           charCount: charCount.trim() ? Number(charCount) : undefined,
+          noSpaces: noSpaces || undefined,
         }),
       });
 
@@ -172,11 +174,13 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
             seed={seed}
             preset={preset}
             charCount={charCount}
+            noSpaces={noSpaces}
             onParagraphsChange={setParagraphs}
             onSentencesChange={setSentencesPerParagraph}
             onSeedChange={setSeed}
             onPresetChange={handlePresetChange}
             onCharCountChange={setCharCount}
+            onNoSpacesChange={setNoSpaces}
             onGenerate={handleGenerate}
             isLoading={isLoading}
             labels={{

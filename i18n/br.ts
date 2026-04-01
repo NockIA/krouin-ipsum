@@ -21,6 +21,7 @@ export const br: UiLabels = {
     charCount: 'Niver arouezioù',
     charCountHint: 'Diret, a ziskar ar parametroù a-us',
     charCountPlaceholder: 'sk : 255',
+    noSpaces: 'Hep esaouennoù',
     generate: 'Sevel',
     generating: 'O sevel...',
   },

@@ -6,11 +6,13 @@ interface GeneratorFormProps {
   seed: string;
   preset: 'hero' | 'card' | 'article' | 'short';
   charCount: string;
+  noSpaces: boolean;
   onParagraphsChange: (value: number) => void;
   onSentencesChange: (value: number) => void;
   onSeedChange: (value: string) => void;
   onPresetChange: (value: 'hero' | 'card' | 'article' | 'short') => void;
   onCharCountChange: (value: string) => void;
+  onNoSpacesChange: (value: boolean) => void;
   onGenerate: () => void;
   isLoading: boolean;
   labels: {
@@ -23,6 +25,7 @@ interface GeneratorFormProps {
     charCount: string;
     charCountHint: string;
     charCountPlaceholder: string;
+    noSpaces: string;
     generate: string;
     generating: string;
     presets: {
@@ -40,11 +43,13 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
   seed,
   preset,
   charCount,
+  noSpaces,
   onParagraphsChange,
   onSentencesChange,
   onSeedChange,
   onPresetChange,
   onCharCountChange,
+  onNoSpacesChange,
   onGenerate,
   isLoading,
   labels,
@@ -146,6 +151,19 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
             className="form-input"
             placeholder={labels.charCountPlaceholder}
           />
+        </div>
+
+        <div className="form-group" style={{ justifyContent: 'flex-end' }}>
+          <label htmlFor="noSpaces" className="form-label form-label-checkbox">
+            <input
+              type="checkbox"
+              id="noSpaces"
+              checked={noSpaces}
+              onChange={(e) => onNoSpacesChange(e.target.checked)}
+              className="form-checkbox"
+            />
+            {labels.noSpaces}
+          </label>
         </div>
       </div>
 

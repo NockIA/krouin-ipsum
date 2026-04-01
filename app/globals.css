@@ -341,6 +341,25 @@ body::after {
   color: var(--muted);
 }
 
+.form-label-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  margin-top: auto;
+  padding-bottom: .65rem;
+}
+
+.form-checkbox {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--primary, #ff4e39);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
 .form-input {
   padding: 0.75rem 1rem;
   border: 2px solid var(--input-border);

@@ -21,6 +21,7 @@ export const fr: UiLabels = {
     charCount: 'Nombre de caractères',
     charCountHint: 'Optionnel, remplace les paramètres ci-dessus',
     charCountPlaceholder: 'ex : 255',
+    noSpaces: 'Sans espaces',
     generate: 'Générer',
     generating: 'Génération...',
   },

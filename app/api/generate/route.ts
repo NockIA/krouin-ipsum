@@ -6,6 +6,7 @@ interface GenerateRequest {
   sentencesPerParagraph?: number;
   seed?: string;
   charCount?: number;
+  noSpaces?: boolean;
 }
 
 const parseBoundedNumber = (value: unknown, fallback: number, min: number, max: number) => {
@@ -22,10 +23,11 @@ export async function POST(request: NextRequest) {
     const sentencesPerParagraph = parseBoundedNumber(body.sentencesPerParagraph, 5, 1, 10);
     const seed = typeof body.seed === 'string' ? body.seed.trim() : undefined;
     const charCount = body.charCount != null ? parseBoundedNumber(body.charCount, 0, 1, 10000) : 0;
+    const noSpaces = body.noSpaces === true;
 
     const result = charCount > 0
-      ? generateTextWithExactCharCount(charCount, seed)
-      : generateTextWithStats(paragraphs, sentencesPerParagraph, seed);
+      ? generateTextWithExactCharCount(charCount, seed, noSpaces)
+      : generateTextWithStats(paragraphs, sentencesPerParagraph, seed, noSpaces);
 
     return NextResponse.json({
       success: true,
@@ -50,10 +52,11 @@ export async function GET(request: NextRequest) {
   const sentencesPerParagraph = parseBoundedNumber(searchParams.get('sentencesPerParagraph'), 5, 1, 10);
   const seed = searchParams.get('seed')?.trim() || undefined;
   const charCount = searchParams.get('charCount') != null ? parseBoundedNumber(searchParams.get('charCount'), 0, 1, 10000) : 0;
+  const noSpaces = searchParams.get('noSpaces') === 'true';
 
   const result = charCount > 0
-    ? generateTextWithExactCharCount(charCount, seed)
-    : generateTextWithStats(paragraphs, sentencesPerParagraph, seed);
+    ? generateTextWithExactCharCount(charCount, seed, noSpaces)
+    : generateTextWithStats(paragraphs, sentencesPerParagraph, seed, noSpaces);
 
   return NextResponse.json({
     success: true,

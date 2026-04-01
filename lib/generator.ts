@@ -69,17 +69,19 @@ export function countWords(text: string): number {
 export function generateTextWithStats(
   paragraphCount: number,
   sentencesPerParagraph: number,
-  seed?: string
+  seed?: string,
+  noSpaces = false
 ) {
-  const text = generateText(paragraphCount, sentencesPerParagraph, seed);
+  let text = generateText(paragraphCount, sentencesPerParagraph, seed);
+  if (noSpaces) text = text.replace(/\s+/g, '');
   const totalSentences = paragraphCount * sentencesPerParagraph;
-  const words = countWords(text);
+  const words = noSpaces ? null : countWords(text);
 
   return {
     text,
     stats: {
-      paragraphs: paragraphCount,
-      sentences: totalSentences,
+      paragraphs: paragraphCount as number | null,
+      sentences: totalSentences as number | null,
       words,
       chars: null as null | number,
     },
@@ -87,28 +89,30 @@ export function generateTextWithStats(
 }
 
 // Génère exactement N caractères
-export function generateTextWithExactCharCount(charCount: number, seed?: string) {
+export function generateTextWithExactCharCount(charCount: number, seed?: string, noSpaces = false) {
   const randomFn = createSeededRandom(seed);
   let accumulated = '';
 
-  while (accumulated.length < charCount) {
-    const batchSize = Math.max(1, Math.ceil((charCount - accumulated.length) / 80));
+  while (true) {
+    const current = noSpaces ? accumulated.replace(/\s+/g, '') : accumulated;
+    if (current.length >= charCount) break;
+    const remaining = charCount - current.length;
+    const batchSize = Math.max(1, Math.ceil(remaining / (noSpaces ? 65 : 80)));
     const batch = getRandomSentences(Math.min(batchSize + 2, sentences.length), randomFn);
     for (const sentence of batch) {
       if (accumulated.length > 0) accumulated += ' ';
       accumulated += sentence;
-      if (accumulated.length >= charCount) break;
     }
   }
 
-  const text = accumulated.slice(0, charCount);
+  const text = (noSpaces ? accumulated.replace(/\s+/g, '') : accumulated).slice(0, charCount);
 
   return {
     text,
     stats: {
       paragraphs: null as null | number,
       sentences: null as null | number,
-      words: countWords(text),
+      words: noSpaces ? null : countWords(text),
       chars: text.length,
     },
   };

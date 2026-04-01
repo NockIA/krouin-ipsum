@@ -74,7 +74,7 @@ const TextOutput: React.FC<TextOutputProps> = ({ text, stats, language, labels }
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement('a');
     anchor.href = url;
-    anchor.download = `krouin-ipsum.${exportFormat}`;
+    anchor.download = `goelo-gen.${exportFormat}`;
     document.body.appendChild(anchor);
     anchor.click();
     document.body.removeChild(anchor);

@@ -1,10 +1,10 @@
-# Krouin Ipsum
+# Goëlo Gen
 
 **Generateur de Lorem Ipsum en langue bretonne**
 
 Un outil gratuit pour generer du faux texte en breton authentique, destine aux developpeurs et designers.
 
-[Demo en ligne](https://krouin-ipsum.vercel.app/)
+[Demo en ligne](https://goeloGen.vercel.app/)
 
 ---
 
@@ -32,8 +32,8 @@ Un outil gratuit pour generer du faux texte en breton authentique, destine aux d
 
 ```bash
 # Cloner le repository
-git clone https://github.com/votre-username/krouin-ipsum.git
-cd krouin-ipsum
+git clone https://github.com/votre-username/goeloGen.git
+cd goeloGen
 
 # Installer les dependances
 npm install
@@ -74,12 +74,12 @@ GET  /api/generate
 
 ```bash
 # POST
-curl -X POST https://krouin-ipsum.bzh/api/generate \
+curl -X POST https://goeloGen.bzh/api/generate \
   -H "Content-Type: application/json" \
   -d '{"paragraphs": 2, "sentencesPerParagraph": 3, "seed": "mockup-home"}'
 
 # GET
-curl "https://krouin-ipsum.bzh/api/generate?paragraphs=2&sentencesPerParagraph=3&seed=mockup-home"
+curl "https://goeloGen.bzh/api/generate?paragraphs=2&sentencesPerParagraph=3&seed=mockup-home"
 ```
 
 ### Exemple de reponse
@@ -101,7 +101,7 @@ curl "https://krouin-ipsum.bzh/api/generate?paragraphs=2&sentencesPerParagraph=3
 ## Structure du projet
 
 ```
-krouin-ipsum/
+goeloGen/
 ├── app/
 │   ├── page.tsx              # Page principale
 │   ├── layout.tsx            # Layout + metadonnees SEO
@@ -133,7 +133,7 @@ Le parametre `seed` permet de reproduire exactement un resultat.
 
 ### Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/votre-username/krouin-ipsum)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/votre-username/goeloGen)
 
 ### Variables d'environnement
 
@@ -147,6 +147,6 @@ NEXT_PUBLIC_SITE_URL=https://votre-domaine.com
 
 ---
 
-**Krouin Ipsum** - *Testenn-loss e brezhoneg*
+**Goëlo Gen** - *Testenn-loss e brezhoneg*
 
 *« Brezhoneg bev, brezhoneg frank »*

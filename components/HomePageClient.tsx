@@ -142,7 +142,7 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
         <div className="header-brand">
           <HermineLogo className="header-logo" />
           <div className='header-title-div'>
-            <h1 className="header-title">Krouin Ipsum</h1>
+            <h1 className="header-title">Goëlo Gen</h1>
             <span className="header-subtitle">{labels.subtitle}</span>
           </div>
         </div>

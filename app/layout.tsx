@@ -12,13 +12,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://krouin-ipsum.vercel.app").replace(/\/$/, "");
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://goelo-gen.vercel.app").replace(/\/$/, "");
 
 export const metadata: Metadata = {
   // Titre et description optimisés SEO
   title: {
-    default: "Krouin Ipsum - Générateur Lorem Ipsum Breton | Faux texte gratuit",
-    template: "%s | Krouin Ipsum",
+    default: "Goëlo Gen - Générateur Lorem Ipsum Breton | Faux texte gratuit",
+    template: "%s | Goëlo Gen",
   },
   description:
     "Générez du faux texte en breton authentique pour vos maquettes, wireframes et prototypes. 10 000 phrases issues de Wikipédia brezhoneg. Gratuit, rapide, sans inscription.",
@@ -78,8 +78,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     url: siteUrl,
-    siteName: "Krouin Ipsum",
-    title: "Krouin Ipsum - Lorem Ipsum en Breton",
+    siteName: "Goëlo Gen",
+    title: "Goëlo Gen - Lorem Ipsum en Breton",
     description:
       "Le générateur de faux texte breton pour développeurs et designers. Corpus authentique de 10 000 phrases issues de Wikipédia brezhoneg.",
     images: [
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Krouin Ipsum - Générateur Lorem Ipsum Breton avec l'hermine bretonne",
+        alt: "Goëlo Gen - Générateur Lorem Ipsum Breton avec l'hermine bretonne",
         type: "image/png",
       },
     ],
@@ -98,7 +98,7 @@ export const metadata: Metadata = {
   classification: "Developer Tools",
 
   // Autres métadonnées
-  applicationName: "Krouin Ipsum",
+  applicationName: "Goëlo Gen",
   referrer: "origin-when-cross-origin",
   formatDetection: {
     email: false,

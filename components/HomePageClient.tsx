@@ -171,7 +171,10 @@ const HomePageClient: React.FC<HomePageClientProps> = ({ initialLanguage }) => {
             <span>{labels.badge}</span>
           </div>
           <h2 className="hero-title">
-            {labels.heroTitle}
+            <span className="hero-title-accent">{labels.heroTitle}</span>
+            {labels.heroTitleSuffix && (
+              <> <span className="hero-title-suffix">{labels.heroTitleSuffix}</span></>
+            )}
             <span className="hero-title-breton">{labels.heroTitleBr}</span>
           </h2>
           <p className="hero-description">{labels.heroDescription}</p>

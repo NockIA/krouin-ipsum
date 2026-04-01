@@ -177,7 +177,10 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
       </div>
 
       <div className="transforms-panel">
-        <span className="transforms-title">{labels.transformsTitle}</span>
+        <div className="transforms-header">
+          <span className="transforms-title">{labels.transformsTitle}</span>
+          <div className="transforms-title-bar" aria-hidden="true" />
+        </div>
         <div className="transforms-grid">
           {TRANSFORM_KEYS.map(({ key, label }) => (
             <label key={key} htmlFor={`transform-${key}`} className="form-label form-label-checkbox">

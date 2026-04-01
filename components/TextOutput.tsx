@@ -98,6 +98,12 @@ const TextOutput: React.FC<TextOutputProps> = ({ text, stats, language, labels }
     return (
       <div className="output-section">
         <div className="output-placeholder">
+          <div className="output-placeholder-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6M9 16h4M7 4H4a1 1 0 00-1 1v14a1 1 0 001 1h16a1 1 0 001-1V9l-5-5H7z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14 4v5h5" />
+            </svg>
+          </div>
           <p className="output-placeholder-text">{labels.emptyTitle}</p>
           <p className="output-placeholder-hint">{labels.emptyHint}</p>
         </div>

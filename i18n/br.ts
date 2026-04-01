@@ -3,7 +3,8 @@ import type { UiLabels } from './types';
 export const br: UiLabels = {
   subtitle: 'Krouer testenn-liesseurt e brezhoneg',
   badge: 'Evit an diorroerien hag an tresourien',
-  heroTitle: 'Krouer testenn-liesseurt e brezhoneg',
+  heroTitle: 'Krouer testenn-liesseurt',
+  heroTitleSuffix: 'e brezhoneg',
   heroTitleBr: 'Lorem Ipsum e Brezhoneg',
   heroDescription:
     'Sav testenn faos e brezhoneg diwar ur c\'horpus 10 000 frazenn eus Wikipedia Brezhoneg. Mat evit mockups ha raktresoù web.',

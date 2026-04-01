@@ -4,6 +4,7 @@ export interface UiLabels {
   subtitle: string;
   badge: string;
   heroTitle: string;
+  heroTitleSuffix: string;
   heroTitleBr: string;
   heroDescription: string;
   langToggle: string;

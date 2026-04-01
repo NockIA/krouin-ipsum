@@ -3,7 +3,8 @@ import type { UiLabels } from './types';
 export const fr: UiLabels = {
   subtitle: 'Krouer testenn-liesseurt e brezhoneg',
   badge: 'Pour développeurs et designers',
-  heroTitle: 'Générateur Lorem Ipsum Breton',
+  heroTitle: 'Générateur Lorem Ipsum',
+  heroTitleSuffix: 'Breton',
   heroTitleBr: 'Lorem Ipsum e Brezhoneg',
   heroDescription:
     'Générez du faux texte en breton à partir d\'un corpus de 10 000 phrases issues de Wikipedia Brezhoneg. Parfait pour vos maquettes et projets web.',
